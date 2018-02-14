@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var server = require('browser-sync').create();
+var browserSync = require('browser-Sync').create();
 var useref = require('gulp-useref');
 var uglify = require('gulp-uglify');
 var gulpIf = require('gulp-if');
@@ -41,22 +41,22 @@ gulp.task('sass', function(){
     return gulp.src('src/scss/*.scss')
         .pipe(sass()) // Converts Sass to CSS with gulp-sass
         .pipe(gulp.dest('src/css'))
-        .pipe(server.reload({
+        .pipe(browserSync.reload({
             stream: true
         }))
 });
-gulp.task('watch', ['server'], function(){
-    gulp.watch('src/scss/**/*.scss', ['sass','useref', server.reload]);
-    gulp.watch('src/*.html', ['useref',server.reload]);
-    gulp.watch('src/js/**/*.js', ['useref', server.reload]);
-    gulp.watch('src/css/**/*.css', ['useref', server.reload]);
-    gulp.watch('src/fonts/**/*.otf', ['fonts', server.reload]);
-    gulp.watch('src/images/**/*.otf', ['images', server.reload]);
+gulp.task('watch', ['browserSync'], function(){
+    gulp.watch('src/scss/**/*.scss', ['sass','useref', browserSync.reload]);
+    gulp.watch('src/*.html', ['useref',browserSync.reload]);
+    gulp.watch('src/js/**/*.js', ['useref', browserSync.reload]);
+    gulp.watch('src/css/**/*.css', ['useref', browserSync.reload]);
+    gulp.watch('src/fonts/**/*.otf', ['fonts', browserSync.reload]);
+    gulp.watch('src/images/**/*.otf', ['images', browserSync.reload]);
 });
-gulp.task('server', function() {
-    server.init({
-        server: {
-            baseDir: 'dist'
-        },
+gulp.task('browserSync', function() {
+    browserSync.init({
+      server: {
+        baseDir: 'dist'
+      },
     })
-})
+  })
